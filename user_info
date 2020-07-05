@@ -1,0 +1,43 @@
+#! /bin/bash
+
+#To get user details by entering the user name.
+
+file=/etc/passwd
+
+read -p "enter th value of username:" user_name
+
+
+
+info=$(grep "$user_name" $file)
+
+echo "$info"
+
+
+IFS=":"		#assigning the internal field seperator as :.
+
+for i in $info; do
+	echo "$i"
+done
+
+
+
+
+echo -e "\n=>_______________disctrete information_________________________<="
+
+if [ -n "$info" ]; then
+
+read usr pw uid gid full home shell <<< $info     #assigning values directly from the output of an other command variable.
+
+echo "usr is : $usr"
+echo "pw is : $pw"
+echo "uid is : $uid"
+echo "gid is : $gid"
+echo "name is : $full"
+echo "Home is : $home"
+echo "shell	 is : $shell"
+
+else
+	echo "No user found"
+
+fi
+

@@ -1,0 +1,46 @@
+#! /bin/bash
+
+dir="$1"
+
+if [ ! -d $dir ]; then
+	echo "NOT IN DIR"
+	exit
+fi
+
+
+
+if [[ "$OSTYPE"=="linux-gnu" ]]; then 
+	echo "we are in LINUX"
+	cont_files=$(stat -c %y $dir/* | cut -c 12-13 );			#nhours at which each file was modified.
+fi
+echo "$cont_files"
+
+#creating an array of size 24.
+
+for k in {0..23}
+do
+	hours[k]=0;
+	echo ${hours[k]}
+done
+
+#echo ${hours[k]}
+
+
+#To find number of files modifies in the particular hour.
+for i in $cont_files
+do 
+	j=${i#0}					#removing 0's from the number 09---> 9
+	((hours[j]=${hours[j]} +1))	#number of files that was modifies in each hour.#DOUBLE BRACKETS BECAUSE WE NEED IT TO PERFORM ARITHMETIC ACTIONS.
+done
+
+#echo ${hours[@]}
+
+echo -e "HOURS \t NO.OF.FILES"
+echo -e "----- \t -----"
+
+#For PRINTING IN A GOOD MODEL.
+
+for k in {0..23}
+do 
+	echo -e "$k \t ${hours[k]}"
+done

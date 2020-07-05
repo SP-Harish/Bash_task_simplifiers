@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#Can be used to navigate to previous directories without typing cd .. for each reverse movements.
+
+max="$1"
+
+for(( i=0; i<max; i++)); do
+	echo $i
+	cd ../
+done
+
+echo "present directory is: $(pwd)"

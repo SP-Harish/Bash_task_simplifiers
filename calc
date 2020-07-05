@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#to perform complex calculations directly by inputing the equation in the shell.
+
+echo "***Calculator***"
+
+if [ "$1" == "-p" ]; then
+	a=$2
+	shift 2					#when a user inputs the -p we need $@ to take the value for the third parameter instead from -p. thus we shift by two places and start taking inputs as 3rd parameters.
+else
+	a=3
+fi
+
+
+bc << EOF
+scale=$a
+$@				#first char after the calc will be taken as the input
+EOF

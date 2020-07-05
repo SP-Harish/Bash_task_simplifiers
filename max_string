@@ -1,0 +1,29 @@
+#! /bin/bash
+
+echo "+++++=MAX STRING++++++++"
+
+filename=$1
+s=$(strings "$filename")
+
+if [ -r "$filename" ]; then						#checking if the file is 														readable.
+
+	max=0;
+	max_word="";
+	for i in $s; do
+		
+		temp=$(wc -c <<< $i)					#SAME AS temp=$(echo $i | wc -c)
+												#IN BUILT METHOD TO THE WORD LENGTH. temp=${#i}
+		if [ $temp -gt $max ]; then				#GREATER THAN FUNCTION-gt
+			max=$temp;
+			max_word=$i;
+		fi
+		
+	done
+	echo "THE MAX LENGTH IS:$(bc <<< $max-1)"		#BC IS THE ARITHETIC COMMAND 													WITHIN LINUX
+	echo "THE WORD OF MAX LENGTH IS : $max_word"
+
+else
+	echo "INVALID FILE"
+fi
+
+

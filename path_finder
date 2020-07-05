@@ -1,0 +1,44 @@
+#!/bin/bash
+
+echo "+++++++++++PATH SCRIPT++++++++++++"
+
+IFS=":";
+
+#check if the directory is present in the path.
+
+if [ "$1" == "-d" ]; then
+	
+	my_dir=$2;
+	
+	for dir in $PATH; 
+	do
+		if [ "$my_dir" == "$dir" -o "$my_dir" == "$dir/" ]; then  #or because in some cases while using tab system automatically adds the / at the end of the file. to make the script user friendly 
+		echo "Found"
+		fi
+	done
+fi
+
+#checking if command is present in the path.
+
+if [ "$1" == "-c" ]; then
+	mycom=$2;
+	for dir in $PATH;
+	do
+		if [ -e "$dir/$mycom" ];then
+			echo "command present in :"
+			echo $dir/$mycom
+		fi
+	done
+fi
+
+
+#Full list of all the paths present in the PATH dir.
+
+if [ "$1" == "" ]; then
+	for dir in $PATH; do
+		echo "$dir"
+	done
+fi
+
+
+IFS="";
